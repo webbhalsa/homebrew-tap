@@ -5,20 +5,20 @@
 class Dave < Formula
   desc "DAVE deployment CLI"
   homepage "https://github.com/webbhalsa/dave-cli2"
-  version "0.0.3"
+  version "0.0.6"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.0.3/dave-cli2_darwin_amd64.tar.gz"
-      sha256 "6a8d690cf7078c3fc11654605a6364e786282f9c97efe534ab6d735c3a656751"
+      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.0.6/dave-cli2_darwin_amd64.tar.gz"
+      sha256 "e3538d5c70f2955b030aedfd4bff5000c9c4d77a93ebdbfea11e1a0d5a1f02dc"
 
       define_method(:install) do
         bin.install "dave"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.0.3/dave-cli2_darwin_arm64.tar.gz"
-      sha256 "68a30068203f6f277cebaa2d314e6ae35dc9c78a58c4190fd3d5156104857a18"
+      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.0.6/dave-cli2_darwin_arm64.tar.gz"
+      sha256 "65366e46de72257c479869188cfcd382bb530f8256f3a363f3cdf147f016e1ee"
 
       define_method(:install) do
         bin.install "dave"
@@ -28,33 +28,35 @@ class Dave < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.0.3/dave-cli2_linux_amd64.tar.gz"
-      sha256 "43627c22246cd93738f8028fa49cbe4854e0985c1b710d99d4538cc5de2d03c5"
+      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.0.6/dave-cli2_linux_amd64.tar.gz"
+      sha256 "3183971b89e2397ee0e219809e4e15251c40a5852d08888e892574901eab3c6c"
       define_method(:install) do
         bin.install "dave"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.0.3/dave-cli2_linux_arm64.tar.gz"
-      sha256 "ba0267b5501559deb1d6c080488c083a7aea0734158eca610ecba045fd1ce741"
+      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.0.6/dave-cli2_linux_arm64.tar.gz"
+      sha256 "fc2e93ee4c4ba55967cbcd3888de337d7108ea8ea1acf2dd075f4c73db8769b2"
       define_method(:install) do
         bin.install "dave"
       end
     end
   end
 
-  def post_install
-    if which("pip3")
-      old_dave = `pip3 show dave 2>/dev/null`.strip
-      unless old_dave.empty?
-        opoo "Found the old Python-based dave CLI installed via pip3."
-        opoo "Removing it to prevent conflicts with this installation..."
-        if system("pip3", "uninstall", "-y", "dave")
-          ohai "Old dave CLI removed. You are now running the new Go-based dave CLI."
-        else
-          opoo "Could not remove automatically. Please run: pip3 uninstall dave"
-        end
-      end
-    end
+  def caveats
+    <<~EOS
+      If you previously had the Python-based dave CLI installed via pip3,
+      you may need to remove it to avoid conflicts:
+
+        pip3 uninstall dave
+
+      If you still see the old binary, also remove it manually:
+
+        rm $(which dave)
+
+      Then re-link this installation:
+
+        brew link --overwrite dave
+    EOS
   end
 end
