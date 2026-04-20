@@ -5,20 +5,20 @@
 class Dave < Formula
   desc "DAVE deployment CLI"
   homepage "https://github.com/webbhalsa/dave-cli2"
-  version "0.2.2"
+  version "0.2.3"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.2.2/dave-cli2_darwin_amd64.tar.gz"
-      sha256 "4e69abd7361e0e4cd361e556a7480d5bc38c2d147c4ff94cf1fd1cb96680cae9"
+      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.2.3/dave-cli2_darwin_amd64.tar.gz"
+      sha256 "dee09368f8c77e7d4e8bfcb2995c9a86775f3960001edae1a8891a461aba123e"
 
       define_method(:install) do
         bin.install "dave"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.2.2/dave-cli2_darwin_arm64.tar.gz"
-      sha256 "236ce862452c081a1e7f7e25546be2310e9afd09c8a0733953a612c82604bab5"
+      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.2.3/dave-cli2_darwin_arm64.tar.gz"
+      sha256 "945e17d200551b95147c68bdf8c54ed4ab34125a10e62c3950b51d6998284c97"
 
       define_method(:install) do
         bin.install "dave"
@@ -28,15 +28,15 @@ class Dave < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.2.2/dave-cli2_linux_amd64.tar.gz"
-      sha256 "7aa66ed7fe00f3168655600bc26d0bb27a04b91058b6dcf0cd1cd6c3c5c2f5df"
+      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.2.3/dave-cli2_linux_amd64.tar.gz"
+      sha256 "a3032b3004187c3ac484f50feea15a561baaabb42bcaa31d5eabaea997a92c25"
       define_method(:install) do
         bin.install "dave"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.2.2/dave-cli2_linux_arm64.tar.gz"
-      sha256 "f36b0d06b7b39f024763415ffb5d95f2edff87c907eefb7fbac1adc58362347b"
+      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.2.3/dave-cli2_linux_arm64.tar.gz"
+      sha256 "8c1848f6c56ef6b8aae8b6c0e7adabe1e758140c009cac1a705092e266d14c6e"
       define_method(:install) do
         bin.install "dave"
       end
