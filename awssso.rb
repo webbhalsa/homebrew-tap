@@ -5,20 +5,20 @@
 class Awssso < Formula
   desc "AWS SSO helper — setup and login made easy"
   homepage "https://github.com/webbhalsa/awssso"
-  version "0.0.2"
+  version "0.0.3"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.2/awssso_darwin_amd64.tar.gz"
-      sha256 "3b4f6429f375ca3d85039f092207f3e94b22e17ac38580df37a1d57b65db3d6e"
+      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.3/awssso_darwin_amd64.tar.gz"
+      sha256 "19885064652e9275d59e69467ee339648995a6ac2fa1fcafca2323e6cf75d590"
 
       define_method(:install) do
         bin.install "awssso"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.2/awssso_darwin_arm64.tar.gz"
-      sha256 "c06bb68f2e2c90d5d8488d477ee7174cb67d1d494b2ccb7e8791e19b223deb1c"
+      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.3/awssso_darwin_arm64.tar.gz"
+      sha256 "6a078e793f1041aa9a1295c5015db7ee6bab3b82f08667ff960a5b9ac1b3e205"
 
       define_method(:install) do
         bin.install "awssso"
@@ -28,15 +28,15 @@ class Awssso < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.2/awssso_linux_amd64.tar.gz"
-      sha256 "7a4c79bb5a4a0ec9fb4ad35949b0aff7558085ef6e2d00a5cbe4ce55124dc8e8"
+      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.3/awssso_linux_amd64.tar.gz"
+      sha256 "dddc55b6e745f89502699454c44831c06fa889b2871482b7c166980fadd76bd9"
       define_method(:install) do
         bin.install "awssso"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.2/awssso_linux_arm64.tar.gz"
-      sha256 "bb9d70868433aaacfa4722a3a597aed0ded331afa00abe612a8af7c93185411e"
+      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.3/awssso_linux_arm64.tar.gz"
+      sha256 "ccfaa87f3980f4c66345a37aa2a9045816a947a0785fd50427347637d2d9c333"
       define_method(:install) do
         bin.install "awssso"
       end
@@ -57,6 +57,7 @@ class Awssso < Formula
         line = 'eval "$(awssso init)"'
       end
 
+      rc = File.realpath(rc) if File.symlink?(rc)
       unless File.exist?(rc) && File.read(rc).include?("awssso init")
         FileUtils.mkdir_p(File.dirname(rc))
         File.open(rc, "a") do |f|
