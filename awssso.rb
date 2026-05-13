@@ -5,20 +5,20 @@
 class Awssso < Formula
   desc "AWS SSO helper — setup and login made easy"
   homepage "https://github.com/webbhalsa/awssso"
-  version "0.0.1"
+  version "0.0.2"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.1/awssso_darwin_amd64.tar.gz"
-      sha256 "f7513881a52f9e90f84dba40c2d9c21705c8384be79bb7282cc15e54b6bd0976"
+      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.2/awssso_darwin_amd64.tar.gz"
+      sha256 "3b4f6429f375ca3d85039f092207f3e94b22e17ac38580df37a1d57b65db3d6e"
 
       define_method(:install) do
         bin.install "awssso"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.1/awssso_darwin_arm64.tar.gz"
-      sha256 "c79067ab9c6efca2020eda463f622aa2e43d51762c24a2526daa9016ac7ae304"
+      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.2/awssso_darwin_arm64.tar.gz"
+      sha256 "c06bb68f2e2c90d5d8488d477ee7174cb67d1d494b2ccb7e8791e19b223deb1c"
 
       define_method(:install) do
         bin.install "awssso"
@@ -28,15 +28,15 @@ class Awssso < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.1/awssso_linux_amd64.tar.gz"
-      sha256 "b55311a523f8605387ebe93b2af8068be5c4272468d4c93c191cd3c5f112aac3"
+      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.2/awssso_linux_amd64.tar.gz"
+      sha256 "7a4c79bb5a4a0ec9fb4ad35949b0aff7558085ef6e2d00a5cbe4ce55124dc8e8"
       define_method(:install) do
         bin.install "awssso"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.1/awssso_linux_arm64.tar.gz"
-      sha256 "488fafcd6e51c777acdae0d87a8cd13dc98d0d33de1bf8bebe8f6ec01e971f1f"
+      url "https://github.com/webbhalsa/awssso/releases/download/v0.0.2/awssso_linux_arm64.tar.gz"
+      sha256 "bb9d70868433aaacfa4722a3a597aed0ded331afa00abe612a8af7c93185411e"
       define_method(:install) do
         bin.install "awssso"
       end
@@ -44,26 +44,31 @@ class Awssso < Formula
   end
 
   def post_install
-    # Inject shell integration into the user's shell rc file if not already present.
-    shell = ENV["SHELL"] || ""
-    if shell.end_with?("fish")
-      rc = "#{Dir.home}/.config/fish/config.fish"
-      line = "awssso init | source"
-    elsif shell.end_with?("zsh")
-      rc = "#{Dir.home}/.zshrc"
-      line = 'eval "$(awssso init)"'
-    else
-      rc = "#{Dir.home}/.bashrc"
-      line = 'eval "$(awssso init)"'
-    end
-
-    unless File.exist?(rc) && File.read(rc).include?("awssso init")
-      File.open(rc, "a") do |f|
-        f.puts "\n# awssso shell integration"
-        f.puts line
+    begin
+      shell = ENV["SHELL"] || ""
+      if shell.end_with?("fish")
+        rc = "#{Dir.home}/.config/fish/config.fish"
+        line = "awssso init | source"
+      elsif shell.end_with?("zsh")
+        rc = "#{Dir.home}/.zshrc"
+        line = 'eval "$(awssso init)"'
+      else
+        rc = "#{Dir.home}/.bashrc"
+        line = 'eval "$(awssso init)"'
       end
-      opoo "Added awssso shell integration to #{rc}"
-      opoo "Restart your shell or run: source #{rc}"
+
+      unless File.exist?(rc) && File.read(rc).include?("awssso init")
+        FileUtils.mkdir_p(File.dirname(rc))
+        File.open(rc, "a") do |f|
+          f.puts "\n# awssso shell integration"
+          f.puts line
+        end
+        opoo "Added awssso shell integration to #{rc}"
+        opoo "Restart your shell or run: source #{rc}"
+      end
+    rescue => e
+      opoo "Could not add shell integration automatically: #{e}"
+      opoo "Add it manually — see caveats above."
     end
   end
 
