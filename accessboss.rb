@@ -5,20 +5,20 @@
 class Accessboss < Formula
   desc "Ephemeral AWS access management from the command line"
   homepage "https://github.com/webbhalsa/accessboss-cli"
-  version "0.0.4"
+  version "0.0.5"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/webbhalsa/accessboss-cli/releases/download/v0.0.4/accessboss-cli_darwin_amd64.tar.gz"
-      sha256 "98264b2735992d0b04a71c518e80d0236c27c623fa61b82f175639f5707df1b4"
+      url "https://github.com/webbhalsa/accessboss-cli/releases/download/v0.0.5/accessboss-cli_darwin_amd64.tar.gz"
+      sha256 "a19ac1985e277658c8f16cb5313a407e601d6200d7acfe7e8d6cc393f516a229"
 
       define_method(:install) do
         bin.install "accessboss"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/webbhalsa/accessboss-cli/releases/download/v0.0.4/accessboss-cli_darwin_arm64.tar.gz"
-      sha256 "34846588e1bdd5e1d1ec3d2485484508d496ce7d9cd705237a4fbac386a99d83"
+      url "https://github.com/webbhalsa/accessboss-cli/releases/download/v0.0.5/accessboss-cli_darwin_arm64.tar.gz"
+      sha256 "fabdc9b6481e8be9967c92a3233a9b7ef9105a3d0f37b7a3b4c5ac12228604e1"
 
       define_method(:install) do
         bin.install "accessboss"
@@ -28,15 +28,15 @@ class Accessboss < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/accessboss-cli/releases/download/v0.0.4/accessboss-cli_linux_amd64.tar.gz"
-      sha256 "21dd082bc2eb1ae32af0d9f925dbaaf74cf14bea13be3871b4245774f28fd8e0"
+      url "https://github.com/webbhalsa/accessboss-cli/releases/download/v0.0.5/accessboss-cli_linux_amd64.tar.gz"
+      sha256 "8bde9f60669ccefa772769245728fe190d6d5ec0de24114bdeb3978277ee16e5"
       define_method(:install) do
         bin.install "accessboss"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/accessboss-cli/releases/download/v0.0.4/accessboss-cli_linux_arm64.tar.gz"
-      sha256 "00130222d099d8eabc5fa3e709ecb09651803e54295e9844e59aa30b30a06384"
+      url "https://github.com/webbhalsa/accessboss-cli/releases/download/v0.0.5/accessboss-cli_linux_arm64.tar.gz"
+      sha256 "b2258b26c4853acfe4cf2192b45e731ee622485bc80e4c2209be981f40f49b3c"
       define_method(:install) do
         bin.install "accessboss"
       end
