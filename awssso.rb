@@ -5,20 +5,20 @@
 class Awssso < Formula
   desc "AWS SSO helper — setup and login made easy"
   homepage "https://github.com/webbhalsa/awssso"
-  version "0.2.1"
+  version "0.3.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/webbhalsa/awssso/releases/download/v0.2.1/awssso_darwin_amd64.tar.gz"
-      sha256 "34740e12355d70ff5aea7067e6dbc0ea56fcf3c9cf29984d7cd05ced989af39c"
+      url "https://github.com/webbhalsa/awssso/releases/download/v0.3.0/awssso_darwin_amd64.tar.gz"
+      sha256 "4f11c610a8c0857016aa1681c0aebd3076e2bbd4bdbffcce952d1a48be7860eb"
 
       define_method(:install) do
         bin.install "awssso"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/webbhalsa/awssso/releases/download/v0.2.1/awssso_darwin_arm64.tar.gz"
-      sha256 "3cfdd5306260830bfd066dfb34d119d9756b05f2ff31df621581b55e3b808063"
+      url "https://github.com/webbhalsa/awssso/releases/download/v0.3.0/awssso_darwin_arm64.tar.gz"
+      sha256 "ca90cf0bb0859322d0875da8ad5e8ba999c2bbd2967f01bdf0f579260c9b44ad"
 
       define_method(:install) do
         bin.install "awssso"
@@ -28,15 +28,15 @@ class Awssso < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/awssso/releases/download/v0.2.1/awssso_linux_amd64.tar.gz"
-      sha256 "8ac358f3286eaf9a775cf3762334ab6ac8246bf458c6ccc7b1988abe06d21221"
+      url "https://github.com/webbhalsa/awssso/releases/download/v0.3.0/awssso_linux_amd64.tar.gz"
+      sha256 "d474e62c8596ab2f173fc668d4869e56e1922029bc0f61dc4221666cfe7912ce"
       define_method(:install) do
         bin.install "awssso"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/awssso/releases/download/v0.2.1/awssso_linux_arm64.tar.gz"
-      sha256 "12acd38e7464aac6ea9a38cebf56d4cc1ef8c5caf61f02d7943687a4fab61979"
+      url "https://github.com/webbhalsa/awssso/releases/download/v0.3.0/awssso_linux_arm64.tar.gz"
+      sha256 "bd8d0680eb8de1debc34d2d6c1b60d9f07874b00796d2f06afc7eb9e956e90d9"
       define_method(:install) do
         bin.install "awssso"
       end
