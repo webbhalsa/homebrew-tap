@@ -16,6 +16,22 @@ cask "colimabar" do
 
   app "ColimaBar.app"
 
+  caveats <<~EOS
+    ColimaBar is currently ad-hoc signed, so macOS Gatekeeper blocks
+    it on first launch. Open it once by either:
+
+      • right-clicking ColimaBar in Launchpad or Finder and choosing
+        Open, then Open again in the dialog, or
+
+      • running this in a terminal:
+          xattr -d com.apple.quarantine /Applications/ColimaBar.app
+
+    Subsequent launches work normally.
+
+    ColimaBar wraps the `colima` CLI — installed automatically as a
+    dependency of this cask.
+  EOS
+
   zap trash: [
     "~/Library/Preferences/se.kry.ColimaBar.plist",
     "~/Library/Application Scripts/se.kry.ColimaBar",
