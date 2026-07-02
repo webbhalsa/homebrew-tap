@@ -12,7 +12,7 @@ cask "colimabar" do
   homepage "https://github.com/webbhalsa/colimabar"
 
   depends_on formula: "colima"
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
 
   app "ColimaBar.app"
 
