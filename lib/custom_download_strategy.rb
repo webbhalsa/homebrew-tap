@@ -1,15 +1,14 @@
 # typed: false
 # frozen_string_literal: true
 
-# Downloads release assets from PRIVATE/INTERNAL GitHub repositories.
+# Downloads release assets from private/internal GitHub repositories.
 #
-# The webbhalsa tool repos (accessboss-cli, awssso, dave-cli2) are internal, so
-# their release tarballs can no longer be fetched over unauthenticated HTTPS.
+# Their release tarballs can't be fetched over unauthenticated HTTPS, and
 # Homebrew's built-in GitHubPrivateRepositoryReleaseDownloadStrategy was removed,
 # so we vendor our own here. It reads a token from HOMEBREW_GITHUB_API_TOKEN,
 # resolves the release asset via the GitHub API, and downloads it authenticated.
 #
-# Users must export a token with read access to the internal repos, e.g.:
+# Users must export a token with read access to the source repository, e.g.:
 #     export HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)"
 #
 # Formulas opt in via `using: GitHubPrivateRepositoryReleaseDownloadStrategy`.
@@ -38,8 +37,8 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < CurlDownloadStrategy
     return unless @github_token.nil? || @github_token.empty?
 
     raise CurlDownloadStrategyError, <<~EOS
-      HOMEBREW_GITHUB_API_TOKEN is required to install from the internal
-      webbhalsa repositories. Set it to a token with read access, e.g.:
+      HOMEBREW_GITHUB_API_TOKEN is required to download release assets from a
+      private GitHub repository. Set it to a token with read access, e.g.:
 
           export HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)"
     EOS
@@ -52,12 +51,14 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < CurlDownloadStrategy
   private
 
   def _fetch(url:, resolved_url:, timeout: nil, **)
-    curl_download(
+    args = [
       download_url,
       "--header", "Accept: application/octet-stream",
       "--header", "Authorization: token #{@github_token}",
-      to: temporary_path,
-    )
+    ]
+    # Honor Homebrew's download timeout so a stalled transfer aborts as expected.
+    args += ["--max-time", timeout.to_s] if timeout && timeout.to_f.positive?
+    curl_download(*args, to: temporary_path)
   end
 
   def asset_id
