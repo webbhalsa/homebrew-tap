@@ -24,7 +24,8 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < CurlDownloadStrategy
   end
 
   def parse_url_pattern
-    url_pattern = %r{https://github.com/([^/]+)/([^/]+)/releases/download/([^/]+)/(\S+)}
+    # Anchored; tag segment allows `/` (valid in git tags), filename is the last segment.
+    url_pattern = %r{\Ahttps://github\.com/([^/]+)/([^/]+)/releases/download/(.+)/([^/]+)\z}
     unless @url =~ url_pattern
       raise CurlDownloadStrategyError, "Invalid URL pattern for GitHub release: #{@url}"
     end
@@ -50,7 +51,7 @@ class GitHubPrivateRepositoryReleaseDownloadStrategy < CurlDownloadStrategy
 
   private
 
-  def _fetch(url:, resolved_url:, timeout: nil, **)
+  def _fetch(url: nil, resolved_url: nil, timeout: nil, **)
     args = [
       download_url,
       "--header", "Accept: application/octet-stream",
