@@ -39,17 +39,17 @@ cask "kryai" do
     end
   end
 
-  version "0.2.0"
+  version "0.2.1"
 
   on_macos do
     on_intel do
-      sha256 "53c62c9d137db3c1e27a9c6de9b03a335598f343bd5fcd4c367e865c91cdfc6f"
+      sha256 "5a685615c5f24696ae7a7a42495df8e70279f2113ec9653936ed16ac3af75dcb"
       url "https://github.com/webbhalsa/kryai/releases/download/v#{version}/kryai_darwin_amd64.tar.gz",
         verified: "github.com/webbhalsa/kryai/",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
     end
     on_arm do
-      sha256 "1a6d579c38a94287b90e0bdac0e2cf7feacdf5baeef535c41f9e8381aea4a4dd"
+      sha256 "b3340dc652f028cf611cf0d27445ab48e120ab4324f02bd80488e5e43026c4ee"
       url "https://github.com/webbhalsa/kryai/releases/download/v#{version}/kryai_darwin_arm64.tar.gz",
         verified: "github.com/webbhalsa/kryai/",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
@@ -58,13 +58,13 @@ cask "kryai" do
 
   on_linux do
     on_intel do
-      sha256 "48c0007cb670a29e973aaf1e190cecfd63308c9084f622bcd8982c4df40e7794"
+      sha256 "eba2155bea36b1deec8232846ead94f78b6ea8aa198373fd80bc11997117ce53"
       url "https://github.com/webbhalsa/kryai/releases/download/v#{version}/kryai_linux_amd64.tar.gz",
         verified: "github.com/webbhalsa/kryai/",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
     end
     on_arm do
-      sha256 "c09ef086d0f6c393c305189bced139d7a99f82705cbfd8e9004310e29568807b"
+      sha256 "069a02e4042d7f1fb14046460e7df78b7643ac16c880da44d79f7af8fa9167f9"
       url "https://github.com/webbhalsa/kryai/releases/download/v#{version}/kryai_linux_arm64.tar.gz",
         verified: "github.com/webbhalsa/kryai/",
         using: GitHubPrivateRepositoryReleaseDownloadStrategy
