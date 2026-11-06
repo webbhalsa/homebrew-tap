@@ -6,20 +6,20 @@ require_relative "lib/custom_download_strategy"
 class Dave < Formula
   desc "DAVE deployment CLI"
   homepage "https://github.com/webbhalsa/dave-cli2"
-  version "0.2.6"
+  version "0.3.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.2.6/dave-cli2_darwin_amd64.tar.gz", using: GitHubPrivateRepositoryReleaseDownloadStrategy
-      sha256 "ce0561d73681674e9eb8d2deb62033c2c732629e782ee9a0ed7cf80bae9924a0"
+      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.3.0/dave-cli2_darwin_amd64.tar.gz", using: GitHubPrivateRepositoryReleaseDownloadStrategy
+      sha256 "1e8389e9357e40433fc5453d308ac75a667e1ea43db43ceb521df030bf107458"
 
       define_method(:install) do
         bin.install "dave"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.2.6/dave-cli2_darwin_arm64.tar.gz", using: GitHubPrivateRepositoryReleaseDownloadStrategy
-      sha256 "56a672570facb0558aab2a3d5b9433e27cc6746e7f3afdbb04a17cce0535bfd3"
+      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.3.0/dave-cli2_darwin_arm64.tar.gz", using: GitHubPrivateRepositoryReleaseDownloadStrategy
+      sha256 "981860b94bbfea65fe79cc8d92e0322ba4fa5d220bbc486542aff009af9f2016"
 
       define_method(:install) do
         bin.install "dave"
@@ -29,15 +29,15 @@ class Dave < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.2.6/dave-cli2_linux_amd64.tar.gz", using: GitHubPrivateRepositoryReleaseDownloadStrategy
-      sha256 "ad420ff41eac3070b0d52e3ca872555a675a242ac386ba412acaea9e59e11069"
+      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.3.0/dave-cli2_linux_amd64.tar.gz", using: GitHubPrivateRepositoryReleaseDownloadStrategy
+      sha256 "fdf66340aa0ce5e8cea4790d61727f951e856ca9d8079e5d146b2d7520bebfb0"
       define_method(:install) do
         bin.install "dave"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.2.6/dave-cli2_linux_arm64.tar.gz", using: GitHubPrivateRepositoryReleaseDownloadStrategy
-      sha256 "ec2efcef42521a1fc6097b8c29dfe40542a7753406f463a51c4813bf36acc39a"
+      url "https://github.com/webbhalsa/dave-cli2/releases/download/v0.3.0/dave-cli2_linux_arm64.tar.gz", using: GitHubPrivateRepositoryReleaseDownloadStrategy
+      sha256 "91a90bc0da5630d31091dfb45f11ef3fed664f3857e7d27ec84246f29cbc4a12"
       define_method(:install) do
         bin.install "dave"
       end
